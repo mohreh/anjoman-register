@@ -9,6 +9,9 @@ yarn-error.log*
 
 .nest
 .nuxt
+.env.development 
+.env.production 
+.env.test
 
 # Runtime data
 pids
