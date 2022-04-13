@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 enum Degree {
   bachelor = 'Bachelor',
@@ -9,7 +9,7 @@ enum Degree {
 @Schema({
   timestamps: true,
 })
-export class User {
+export class Member {
   @Prop({ trim: true })
   name: string;
 
@@ -53,3 +53,7 @@ export class User {
   @Prop({ trim: true })
   interests: string;
 }
+
+export type MemberDocument = Document & Member;
+
+export const MemberEntity = SchemaFactory.createForClass(Member);
