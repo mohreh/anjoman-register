@@ -1,4 +1,4 @@
-import bootstrap from './.nest/prod.js';
+import bootstrap from '~/.nest/prod.js';
 
 const isDev = process.env.NODE_ENV === 'development';
 
