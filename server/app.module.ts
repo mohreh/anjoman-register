@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import { Module, Param } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MemberModule } from './member/member.module';
+import { SmsModule } from './sms/sms.module';
 
 @Module({
   imports: [
@@ -18,6 +19,9 @@ import { MemberModule } from './member/member.module';
           uri: config.get<string>('MONGODB_URI'),
         };
       },
+    }),
+    SmsModule.register({
+      apiKey: process.env.MELIPAYAMAK_KEY,
     }),
     MemberModule,
   ],
