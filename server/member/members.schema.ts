@@ -20,13 +20,13 @@ export class Member {
   @Prop({ type: Date, default: '2000-01-01' })
   birth: Date;
 
-  @Prop({ trim: true, required: true })
+  @Prop({ trim: true, required: true, unique: true })
   phoneNumber: string;
 
   @Prop({ type: Boolean, default: false })
   verifyPhoneNumber: boolean;
 
-  @Prop({ trim: true, required: true })
+  @Prop({ trim: true, required: true, unique: true })
   studentNumber: string;
 
   @Prop({ type: Boolean, default: false })

@@ -14,6 +14,17 @@ export class MemberService {
     return await this.memberModel.findOne({ phoneNumber });
   }
 
+  async findByPhoneNumberAndUpdate(phoneNumber: string, data: any) {
+    return await this.memberModel.findOneAndUpdate(
+      {
+        phoneNumber,
+      },
+      {
+        ...data,
+      },
+    );
+  }
+
   async create(data: any) {
     const member = new this.memberModel(data);
 
@@ -22,9 +33,5 @@ export class MemberService {
     } catch (err: any) {
       throw new InternalServerErrorException(err.message);
     }
-  }
-
-  async findAll() {
-    return await this.memberModel.find();
   }
 }

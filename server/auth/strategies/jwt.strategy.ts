@@ -29,6 +29,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
     // const { id, role, defaultAddress } = user;
     // return { id, role, defaultAddress };
-    return { phoneNumber: member.phoneNumber };
+    return {
+      phoneNumber: member.phoneNumber,
+    };
   }
 }

@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
 import { MemberService } from '../member/member.service';
 import { SmsService } from '../sms/sms.service';
+import { Member } from '../member/members.schema';
 import { AuthCode, AuthCodeDocument } from './auth-code.schema';
 import { JwtPayload, JwtToken } from './interfaces/jwt-payload.interface';
 
@@ -57,24 +58,35 @@ export class AuthService {
     }
 
     if (pin === authCode.pin) {
+      await this.memberService.findByPhoneNumberAndUpdate(
+        authCode.phoneNumber,
+        {
+          verifyPhoneNumber: true,
+        },
+      );
+
       return authCode.phoneNumber;
     }
 
     throw new BadRequestException('pin you entered is wrong');
   }
 
-  async registerUser(phoneNumber: string) {
-    let member = await this.memberService.findByPhoneNumber(phoneNumber);
+  async registerMember(data: any) {
+    try {
+      let member = await this.memberService.findByPhoneNumber(data.phoneNumber);
 
-    if (!member) {
-      member = await this.memberService.create({ phoneNumber });
+      if (!member) {
+        member = await this.memberService.create(data);
+      }
+
+      return member;
+    } catch (err: any) {
+      throw new InternalServerErrorException(err.message);
     }
-
-    return member;
   }
 
-  login(id: string): JwtToken {
-    const payload: JwtPayload = { sub: id };
+  login(member: Member): JwtToken {
+    const payload: JwtPayload = { sub: member.phoneNumber };
     return {
       access_token: this.jwtService.sign(payload),
     };
