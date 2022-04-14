@@ -21,14 +21,14 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
   async validate(payload: JwtPayload): Promise<UserLogin> {
     const { sub } = payload;
-    const user = await this.authService.findById(sub);
+    const member = await this.authService.findByPhoneNumber(sub);
 
-    if (!user) {
+    if (!member) {
       throw new NotFoundException('user does not exist on database');
     }
 
     // const { id, role, defaultAddress } = user;
     // return { id, role, defaultAddress };
-    return user;
+    return { phoneNumber: member.phoneNumber };
   }
 }

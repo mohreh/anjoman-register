@@ -2,7 +2,6 @@ import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { Public } from './decorators/public.decorator';
-import { RegisterActionDto } from './dtos/register-action.dto';
 import { AuthCodeGuard } from './guards/authentication-code.guard';
 import { JwtToken } from './interfaces/jwt-payload.interface';
 
@@ -13,7 +12,7 @@ export class AuthController {
   @Public()
   @Post('register')
   async sendAuthenticationCode(
-    @Body() { phoneNumber }: RegisterActionDto,
+    @Body() { phoneNumber },
   ): Promise<{ reqId: string }> {
     const reqId = await this.authService.sendAuthenticationCode(phoneNumber);
     return { reqId };
@@ -22,7 +21,8 @@ export class AuthController {
   @Public()
   @Post('verify')
   @UseGuards(AuthCodeGuard)
-  verifyUser(@Req() req: Request): JwtToken {
-    return this.authService.login(req.user.id);
+  verifyUser(@Req() req: Request) {
+    console.log(req);
+    // return this.authService.login(req.user.phoneNumber);
   }
 }

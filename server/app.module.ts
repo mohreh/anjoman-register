@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MemberModule } from './member/member.module';
 import { SmsModule } from './sms/sms.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { SmsModule } from './sms/sms.module';
       apiKey: process.env.MELIPAYAMAK_KEY,
     }),
     MemberModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
