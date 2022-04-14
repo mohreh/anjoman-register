@@ -34,7 +34,7 @@ export class AuthService {
         authCode = await authCode.save();
       }
 
-      const reqId = authCode._id.toString();
+      const reqId = authCode.id;
       const pin = authCode.pin;
 
       await this.smsService.sendAuthenticationCode({
@@ -48,10 +48,14 @@ export class AuthService {
     }
   }
 
-  async verifyAuthenticationCode(reqId: string, pin: string): Promise<string> {
+  async verifyAuthenticationCode(
+    reqId: string,
+    pin: string,
+    phoneNumber: string,
+  ): Promise<string> {
     const authCode = await this.authCodeModel.findById(reqId);
 
-    if (!authCode) {
+    if (!authCode || authCode.phoneNumber !== phoneNumber) {
       throw new BadRequestException(
         'pin you entered does not exist on database or expired',
       );
@@ -85,8 +89,14 @@ export class AuthService {
     }
   }
 
-  login(member: Member): JwtToken {
-    const payload: JwtPayload = { sub: member.phoneNumber };
+  login(member: Member, phoneNumber?: string): JwtToken {
+    let payload: JwtPayload;
+
+    if (!member.phoneNumber) {
+      payload = { sub: phoneNumber };
+    }
+
+    payload = { sub: member.phoneNumber };
     return {
       access_token: this.jwtService.sign(payload),
     };
