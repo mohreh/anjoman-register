@@ -10,5 +10,6 @@ import { Member, MemberSchema } from './members.schema';
   ],
   controllers: [MemberController],
   providers: [MemberService],
+  exports: [MemberService],
 })
 export class MemberModule {}
