@@ -11,28 +11,28 @@ enum Degree {
   timestamps: true,
 })
 export class Member {
-  @Prop({ trim: true })
+  @Prop({ trim: true, required: true })
   name: string;
 
-  @Prop({ trim: true })
+  @Prop({ trim: true, required: true })
   familyName: string;
 
   @Prop({ type: Date, default: '2000-01-01' })
   birth: Date;
 
-  @Prop({ trim: true })
+  @Prop({ trim: true, required: true })
   phoneNumber: string;
 
   @Prop({ type: Boolean, default: false })
   verifyPhoneNumber: boolean;
 
-  @Prop({ trim: true })
+  @Prop({ trim: true, required: true })
   studentNumber: string;
 
   @Prop({ type: Boolean, default: false })
   dormitoryStudent: boolean;
 
-  @Prop({ trim: true, type: String, default: '' })
+  @Prop({ trim: true, type: String })
   dormitory: string;
 
   @Prop({ trim: true })
@@ -50,8 +50,8 @@ export class Member {
   @Prop({ trim: true })
   activityRecords: string;
 
-  @Prop()
-  cooperationAreas: string;
+  @Prop({ type: [String], required: true })
+  cooperationAreas: string[];
 
   @Prop({ trim: true })
   interests: string;
