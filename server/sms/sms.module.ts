@@ -1,5 +1,5 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { CONFIG_OPTIONS } from '../common/common.constants';
+import { CONFIG_OPTIONS } from './sms.constants';
 import { SmsModuleOptions } from './sms.interfaces';
 import { SmsService } from './sms.service';
 
