@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { Request } from 'express';
-import { Member } from '../member/members.schema';
 import { AuthService } from './auth.service';
 import { Public } from './decorators/public.decorator';
 

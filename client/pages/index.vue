@@ -171,7 +171,7 @@ export default Vue.extend({
       baseURL:
         process.env.NODE_ENV === 'development'
           ? `http://localhost:3000`
-          : `http://localhost:8000/api`,
+          : `https://localhost:8000/api`,
       errors: [],
       pin: null,
       verifyReqId: 0,
@@ -227,7 +227,7 @@ export default Vue.extend({
       const url =
         process.env.NODE_ENV === 'development'
           ? `http://localhost:3000/auth`
-          : `http://localhost:8000/api/auth`;
+          : `https://localhost:8000/api/auth`;
 
       this.me = await this.$axios.$get(`${url}`, {
         headers: {
@@ -301,7 +301,6 @@ export default Vue.extend({
       } else if (!this.body.phoneNumber) {
         this.errors.push('لطفا شماره تماس را وارد کنید');
       } else {
-        console.log(this.body.schoolProfile);
         const res = this.$axios.post(`${this.baseURL}/auth`, {
           ...this.body,
         });
