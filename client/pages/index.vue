@@ -229,14 +229,17 @@ export default Vue.extend({
           ? `http://localhost:3000/auth`
           : `https://localhost:8000/api/auth`;
 
+      const res = await this.$axios.$get(`${url}`, {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`,
+        },
+      });
+
       try {
-        this.me = await this.$axios.$get(`${url}`, {
-          headers: {
-            Authorization: `Bearer ${this.accessToken}`,
-          },
-        });
+        this.me = await res;
       } catch (err: any) {
-        console.log(err.message);
+        console.log(res);
+        console.log(err);
       }
     },
 
