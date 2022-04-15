@@ -11,7 +11,7 @@ export default async () => ({
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt-nest-starter',
+    title: 'anjoman-register',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -48,9 +48,9 @@ export default async () => ({
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: isDev
-      ? `http://localhost:${process.env.PORT}`
-      : `http://localhost:8000/api`,
+    // baseURL: isDev
+    //   ? `http://localhost:${process.env.PORT}/auth`
+    //   : `http://localhost:8000/api/auth`,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
