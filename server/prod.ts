@@ -8,7 +8,7 @@ async function bootstrap() {
     allowedHeaders: '*',
     credentials: true,
     origin: '*',
-    methods: '*',
+    // methods: '*',
   });
   app.use(helmet());
   await app.init();
