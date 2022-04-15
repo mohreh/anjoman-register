@@ -232,6 +232,7 @@ export default Vue.extend({
       const res = await this.$axios.$get(`${url}`, {
         headers: {
           Authorization: `Bearer ${this.accessToken}`,
+          'Access-Control-Allow-Origin': '*',
         },
       });
 
@@ -248,6 +249,7 @@ export default Vue.extend({
       const res = await this.$axios.$get(`${this.baseURL}/auth/verify`, {
         headers: {
           Authorization: `Bearer ${this.accessToken}`,
+          'Access-Control-Allow-Origin': '*',
         },
       });
       this.verifyReqId = res.reqId;
@@ -263,6 +265,7 @@ export default Vue.extend({
         {
           headers: {
             Authorization: `Bearer ${this.accessToken}`,
+            'Access-Control-Allow-Origin': '*',
           },
         },
       );
@@ -308,9 +311,17 @@ export default Vue.extend({
       } else if (!this.body.phoneNumber) {
         this.errors.push('لطفا شماره تماس را وارد کنید');
       } else {
-        const res = this.$axios.post(`${this.baseURL}/auth`, {
-          ...this.body,
-        });
+        const res = this.$axios.post(
+          `${this.baseURL}/auth`,
+          {
+            ...this.body,
+          },
+          {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+            },
+          },
+        );
         this.pending = true;
         try {
           this.accessToken = (await res).data.access_token;
