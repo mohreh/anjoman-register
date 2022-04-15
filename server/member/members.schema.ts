@@ -2,7 +2,7 @@ import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 
 enum Degree {
-  bachelor = 'Bachelor',
+  bachelor = 'BA',
   ma = 'MA',
   phd = 'PHD',
 }
@@ -39,13 +39,18 @@ export class Member {
   email: string;
 
   @Prop(
-    raw({
-      degree: { type: mongoose.Schema.Types.Mixed, enum: Degree },
-      univercity: { type: String },
-      college: { type: String },
-    }),
+    raw([
+      {
+        degree: { type: mongoose.Schema.Types.Mixed, enum: Degree },
+        univercity: { type: String },
+        college: { type: String },
+        field: { type: String },
+        entrance: { type: String },
+        orientation: { type: String },
+      },
+    ]),
   )
-  schoolProfile: Record<string, any>;
+  schoolProfile: Record<string, any>[];
 
   @Prop({ trim: true })
   activityRecords: string;
