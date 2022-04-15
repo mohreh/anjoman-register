@@ -321,6 +321,12 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  font-family: 'Vazirmatn', sans-serif;
+}
+
 input {
   outline: none;
   @apply inline-block bg-gray-100 border-2 rounded-lg px-3 py-1 my-2 font-semibold text-gray-700;
