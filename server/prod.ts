@@ -7,7 +7,7 @@ async function bootstrap() {
   app.enableCors({
     allowedHeaders: '*',
     credentials: true,
-    origin: 'https://anjoman-register.netlify.app/',
+    origin: '*',
     methods: '*',
   });
   app.use(helmet());

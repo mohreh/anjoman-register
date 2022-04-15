@@ -15,6 +15,11 @@ import { JwtAuthGuard } from './auth/guards/jwt.guard';
       envFilePath: [`.env.${process.env.NODE_ENV}`],
       isGlobal: true,
     }),
+    SmsModule.register({
+      apiKey: process.env.MELIPAYAMAK_KEY,
+    }),
+    MemberModule,
+    AuthModule,
     MongooseModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
@@ -23,11 +28,6 @@ import { JwtAuthGuard } from './auth/guards/jwt.guard';
         };
       },
     }),
-    SmsModule.register({
-      apiKey: process.env.MELIPAYAMAK_KEY,
-    }),
-    MemberModule,
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }, AppService],
