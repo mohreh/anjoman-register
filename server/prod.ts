@@ -8,7 +8,7 @@ async function bootstrap() {
     allowedHeaders: '*',
     credentials: true,
     origin: 'https://anjoman-register.netlify.app/',
-    // methods: '*',
+    methods: '*',
   });
   app.use(helmet());
   await app.init();
