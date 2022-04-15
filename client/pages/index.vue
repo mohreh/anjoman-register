@@ -171,7 +171,7 @@ export default Vue.extend({
       baseURL:
         process.env.NODE_ENV === 'development'
           ? `http://localhost:3000`
-          : `https://localhost:3000/api`,
+          : `https://localhost:8000/api`,
       errors: [],
       pin: null,
       verifyReqId: 0,
@@ -227,7 +227,7 @@ export default Vue.extend({
       const url =
         process.env.NODE_ENV === 'development'
           ? `http://localhost:3000/auth`
-          : `https://localhost:3000/api/auth`;
+          : `https://localhost:8000/api/auth`;
 
       this.me = await this.$axios.$get(`${url}`, {
         headers: {
